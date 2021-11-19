@@ -1,0 +1,7 @@
+node_modules
+
+index.json
+mochawesome-report
+
+cypress/videos
+cypress/screenshots
