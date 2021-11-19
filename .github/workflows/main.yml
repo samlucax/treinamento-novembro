@@ -1,0 +1,38 @@
+name: Regression Tests
+
+# Gatilhos - eventos, programados, manual
+
+on:
+  push:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2.4.1
+        with:
+          node-version: 14.x
+
+      - run: npm install
+
+      - run: npm run test
+      
+      - run: npm run report:merge
+      
+      - run: npm run report:generate
+      
+      - name: Upload do artefato
+        uses: actions/upload-artifact@v2.2.4
+        with:
+          path: mochawesome-report
+      
+      
+      
